@@ -45,7 +45,6 @@ require([
 		// Add spin
 		pointsEntity.setComponent(new ScriptComponent({
 			run : function(entity) {
-<<<<<<< HEAD
 				// if(app && app.data){
 					// console.log(app.data);
 					entity.transformComponent.transform.setRotationXYZ(
@@ -84,7 +83,6 @@ require([
 					// }
 					// entity.meshDataComponent.meshData.vertexData._dataNeedsRefresh = true;
 				// }
-=======
                 // audioData.guess
                 //  Object {totalEnergy: 0.0002676707959839109, primaryNoteEnergy: 0.00005799675205730361, primaryNote: 14437.5}
 
@@ -132,7 +130,6 @@ require([
                     verts[i * 3 + 2] = audioData.guess.totalEnergy * 1000 * (sum * 100);
                 }
                 entity.meshDataComponent.meshData.vertexData._dataNeedsRefresh = true;
->>>>>>> RGB plane visualizer
 			}
 		}));
 		pointsEntity.addToWorld();
@@ -154,11 +151,8 @@ require([
     }
 
 	function createBoxEntity(goo) {
-<<<<<<< HEAD
 		var count = 50000;
-=======
 		var count = NUM_POINTS;
->>>>>>> RGB plane visualizer
 
 		var attributeMap = MeshData.defaultMap([MeshData.POSITION, MeshData.COLOR]);
 		var meshData = new MeshData(attributeMap, count);
