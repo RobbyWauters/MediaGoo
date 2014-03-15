@@ -1,4 +1,5 @@
 var app = null;
+var i=0;
 $(function(){
 	app = new MixApi();
 	context = new webkitAudioContext();
@@ -8,7 +9,7 @@ $(function(){
 		// noteOn with velocity 0 is already mapped to noteOff!
 		app.onNoteOn(function(note, velocity, channel){
 
-			console.log(note);
+			// console.log(note);
 
 
 			var oscillator = context.createOscillator();
@@ -44,10 +45,14 @@ $(function(){
 		//subscribe to all MIDI data; this includes control messages as well.
 
 		app.onData(function(data){
+			i++;
+			if(i>50000) i=0;
 			// console.log(data);
-			app.data = data;
+			//app.data = app.parseData(data);
+			app.data = 0.1 + 0.9 * data[2] / 127.0
 			// app.parseData converts the MIDI data to readable notation; shows what kind of data it is, e.g. NoteOn, C# 2 etc
-			// console.log(app.parseData(data));
+			// if(i%100)
+				// console.log(app.parseData(data));
 		});
 	});
 

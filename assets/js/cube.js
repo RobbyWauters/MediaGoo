@@ -30,17 +30,17 @@ require([
 		pointsEntity.setComponent(new ScriptComponent({
 			run : function(entity) {
 				if(app && app.data){
-					console.log(app.data[0]);
+					// console.log(app.data);
 					entity.transformComponent.transform.setRotationXYZ(
 						entity._world.time * 0.3,
 						entity._world.time * 0.6,
 						0
 					);
 
-					entity.transformComponent.transform.setScaleXYZ(
-						app.data[2],
-						app.data[2],
-						app.data[2]
+					entity.transformComponent.setScale(
+						app.data,
+						app.data,
+						app.data
 					);
 
 					entity.transformComponent.setUpdated();
