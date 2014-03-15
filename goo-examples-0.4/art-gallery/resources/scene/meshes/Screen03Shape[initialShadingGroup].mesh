@@ -1,0 +1,50 @@
+{
+ "vertexCount": 4,
+ "vertexOffsets": {
+  "xOffset": 12103.486,
+  "yOffset": 12829.862,
+  "zOffset": -6803.1753
+ },
+ "vertexScale": 0.0006066775,
+ "vertices": "#耡#耠##㵍#####",
+ "normals": "䀡###䀡###耡###",
+ "textureCoords": [
+  {
+   "UVOffsets": [
+    0,
+    0
+   ],
+   "UVScales": [
+    0.0009775171,
+    0.0009775171
+   ],
+   "UVs": "#ࠡ#ࠠ##ࠡ#"
+  },
+  {
+   "UVOffsets": [
+    4479.6997,
+    14.825541
+   ],
+   "UVScales": [
+    0.00012621607,
+    0.00026409226
+   ],
+   "UVs": "##ࠡ#ࠟࠞ#ࠡ"
+  }
+ ],
+ "indices": "#%%&'%",
+ "indexModes": [
+  "Triangles"
+ ],
+ "indexLengths": [
+  6
+ ],
+ "name": "Screen03Shape[initialShadingGroup]",
+ "type": "Mesh",
+ "compression": {
+  "compressed": true,
+  "compressedUnitVectorRange": 16383,
+  "compressedVertsRange": 16383,
+  "compressedColorsRange": 16383
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "type": "Mesh",
+ "name": "CanvasShape[initialShadingGroup]",
+ "components": {
+  "transform": {
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "rotation": [
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1
+   ],
+   "parentRef": "entities/CanvasShape_2.entity"
+  },
+  "meshData": {
+   "meshRef": "meshes/CanvasShape[initialShadingGroup].mesh"
+  },
+  "meshRenderer": {
+   "castShadows": false,
+   "receiveShadows": false,
+   "cullMode": "Dynamic",
+   "materialRefs": [
+    "materials/lambert1.material"
+   ]
+  }
+ }
+}

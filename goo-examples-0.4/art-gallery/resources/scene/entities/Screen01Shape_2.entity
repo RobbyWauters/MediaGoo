@@ -1,0 +1,30 @@
+{
+ "type": "Node",
+ "name": "Screen01Shape",
+ "components": {
+  "transform": {
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "rotation": [
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1
+   ],
+   "parentRef": "entities/Screen01_1.entity"
+  }
+ }
+}

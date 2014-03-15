@@ -1,5 +1,6 @@
+var app = null;
 $(function(){
-	var app = new MixApi();
+	app = new MixApi();
 	context = new webkitAudioContext();
 	notes = []; // array that keeps track of which notes are playing; otherwise you can't stop them
 	app.init(function(){ // initialize API and wait for callback
@@ -43,9 +44,11 @@ $(function(){
 		//subscribe to all MIDI data; this includes control messages as well.
 
 		app.onData(function(data){
-			console.log(data);
+			// console.log(data);
+			app.data = data;
 			// app.parseData converts the MIDI data to readable notation; shows what kind of data it is, e.g. NoteOn, C# 2 etc
-			console.log(app.parseData(data));
+			// console.log(app.parseData(data));
 		});
 	});
+
 });

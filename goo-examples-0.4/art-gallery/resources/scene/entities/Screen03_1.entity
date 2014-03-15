@@ -1,0 +1,30 @@
+{
+ "type": "Node",
+ "name": "Screen03",
+ "components": {
+  "transform": {
+   "translation": [
+    5.6692435324240005,
+    5.8334350403199878,
+    -9.8408104004808
+   ],
+   "scale": [
+    0.5982424,
+    0.5982424,
+    0.5982424
+   ],
+   "rotation": [
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1
+   ],
+   "parentRef": "entities/Gallery_wo_Lightmap_02_0.entity"
+  }
+ }
+}
