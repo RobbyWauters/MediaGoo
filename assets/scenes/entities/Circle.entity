@@ -1,0 +1,29 @@
+{
+  "components": {
+    "transform": {
+      "rotation": [
+        -0.0, 
+        -0.0, 
+        0.0
+      ], 
+      "scale": [
+        1.0, 
+        1.0, 
+        1.0
+      ], 
+      "translation": [
+        0.0029909461736679077, 
+        0.04079052805900574, 
+        -0.017285823822021484
+      ]
+    }, 
+    "meshData": {
+      "meshRef": "meshes/Circle.mesh"
+    }, 
+    "meshRenderer": {
+      "materialRefs": [
+        "materials/Cup.material"
+      ]
+    }
+  }
+}
