@@ -116,7 +116,7 @@ require([
 		var count = 50000;
 		var meshBuilder = new MeshBuilder(meshData, count, {
 			progress: function (/*percent*/) {
-//				console.log(percent);
+				console.log(percent);
 			},
 			done: function () {
 				//loader.classList.remove('visible');
