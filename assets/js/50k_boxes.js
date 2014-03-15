@@ -11,7 +11,7 @@ require([
 	'goo/renderer/Camera',
 	'goo/entities/components/CameraComponent',
 	'goo/math/Vector3',
-	'goo/util/FastBuilder',
+	'goo/util/MeshBuilder',
 	'goo/math/Transform',
 	'goo/scripts/OrbitCamControlScript',
 	'goo/renderer/light/PointLight',
@@ -30,7 +30,7 @@ require([
 	Camera,
 	CameraComponent,
 	Vector3,
-	FastBuilder,
+	MeshBuilder,
 	Transform,
 	OrbitCamControlScript,
 	PointLight,
@@ -114,7 +114,7 @@ require([
 
 		//var loader = document.getElementById('load');
 		var count = 50000;
-		var meshBuilder = new FastBuilder(meshData, count, {
+		var meshBuilder = new MeshBuilder(meshData, count, {
 			progress: function (/*percent*/) {
 //				console.log(percent);
 			},
