@@ -1,0 +1,270 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+}
+body {
+  background-color: #000;
+  position: relative;
+  color: #fff;
+}
+a {
+  color: inherit;
+  margin: inherit;
+}
+.link {
+  text-decoration: underline;
+}
+.link:hover {
+  text-decoration: none;
+}
+.fancybg {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+  border: none;
+}
+.staticbg {
+  background-image: url("/images/bg_christmas3_cropped.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+}
+.christmassy {
+  font-size: 33px;
+  color: #900;
+}
+.overlay {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+  overflow: hidden;
+}
+.overlay .title {
+  font-size: 45px;
+  font-weight: normal;
+  margin: 10px;
+  margin-top: 25px;
+  line-height: 40px;
+}
+.overlay .subtitle {
+  font-size: 13px;
+  font-style: italic;
+}
+.overlay .cardwrapper {
+  display: inline-block;
+  max-width: 100%;
+}
+.overlay .cardwrapper img.christmascard,
+.overlay .cardwrapper img.userchristmascard {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  opacity: 0.9;
+}
+.overlay .cardwrapper .faketile {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  cursor: pointer;
+  display: none;
+}
+.overlay .cardwrapper .faketile.animate {
+  -webkit-transition: all 1s ease-in;
+  -moz-transition: all 1s ease-in;
+  transition: all 1s ease-in;
+}
+.overlay .cardwrapper img.userchristmascard {
+  -moz-opacity: 0;
+  opacity: 0;
+  -webkit-transition: all 1s ease-in;
+  -moz-transition: all 1s ease-in;
+  transition: all 1s ease-in;
+}
+.overlay .cardwrapper img.userchristmascard.visible {
+  -moz-opacity: 1;
+  opacity: 1;
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+}
+.overlay .button {
+  padding: 20px;
+  width: 104px;
+  height: 104px;
+  display: inline-block;
+  margin-top: 20%;
+  -webkit-box-shadow: inset 0 0 10px #a8c5ff, 0 0 20px #323232;
+  box-shadow: inset 0 0 10px #a8c5ff, 0 0 20px #323232;
+  text-shadow: 0 -1px rgba(0,0,0,0.5);
+  border-color: #34bff3 rgba(0,0,0,0.05) #003c8b;
+  background: #d8dfe2;
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.overlay .button img {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.overlay .button .fileinput {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  opacity: 0;
+  margin-top: -20px;
+  cursor: pointer;
+}
+.overlay .button.left {
+  margin-right: 115px;
+}
+.overlay #oldfashionupload {
+  display: none;
+  padding: 20px;
+  color: #333;
+  margin-top: 20%;
+  -webkit-box-shadow: inset 0 0 10px #a8c5ff, 0 0 20px #323232;
+  box-shadow: inset 0 0 10px #a8c5ff, 0 0 20px #323232;
+  text-shadow: 0 -1px rgba(0,0,0,0.5);
+  border-color: #34bff3 rgba(0,0,0,0.05) #003c8b;
+  background: #d8dfe2;
+  border-radius: 15px;
+  font-size: 16px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.overlay .webcamwrapper {
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.overlay .webcamwrapper .webcam {
+  display: inline-block;
+  width: 550px;
+  height: 320px;
+  margin-top: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 10px;
+  color: #333;
+  -webkit-box-shadow: inset 0 0 10px #a8c5ff, 0 0 20px #323232;
+  box-shadow: inset 0 0 10px #a8c5ff, 0 0 20px #323232;
+  text-shadow: 0 -1px rgba(0,0,0,0.5);
+  border-color: #34bff3 rgba(0,0,0,0.05) #003c8b;
+  background: #d8dfe2;
+  border-radius: 15px;
+  font-size: 16px;
+}
+.overlay .webcamwrapper .webcam video {
+  width: 100%;
+  height: 100%;
+}
+.overlay .webcamwrapper .webcam .takepicture {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 50px;
+  font-weight: 400;
+  text-align: center;
+  background: #c30000;
+  color: #f3f3f4;
+  font-size: 23px;
+  line-height: 50px;
+  width: 100%;
+  cursor: pointer;
+}
+.overlay .webcamwrapper .webcam canvas {
+  display: none;
+}
+#shareimage {
+  max-height: 65%;
+  max-width: 90%;
+  border: 3px solid #fff;
+  border-radius: 15px;
+}
+.sharewrapper {
+  padding-left: 1%;
+  padding-right: 1%;
+}
+.sharewrapper .share {
+  margin-left: 10px;
+  background-color: rgba(56,49,49,0.78);
+  width: 652px;
+  max-width: 100%;
+  border-radius: 0px 0px 5px 5px;
+  margin-top: -3px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2px;
+  padding-bottom: 5px;
+}
+.sharewrapper .share img {
+  max-width: 15%;
+}
+.highqualitylink {
+  font-weight: 100;
+  padding-bottom: 12px;
+  font-size: 17px;
+}
+.retry {
+  font-weight: 100;
+  margin-top: 20;
+  padding-bottom: 12px;
+  font-size: 17px;
+}
+.webcamNotification {
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
+  left: 0px;
+  color: #000;
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .overlay {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .overlay .title {
+    font-size: 20px;
+    line-height: 20px;
+  }
+  .overlay .subtitle {
+    font-size: 9px;
+  }
+  .share img {
+    max-width: 15%;
+  }
+}

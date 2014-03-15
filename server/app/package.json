@@ -1,0 +1,19 @@
+{
+  "name": "kerstkaart2013",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "3.0.3",
+    "jade": "*",
+    "stylus": "~0.40.3",
+    "async": "~0.2.9",
+    "printf": "~0.1.2",
+    "underscore": "~1.5.2",
+    "simple-imagemagick": "*",
+    "mobile-detect": "~0.1.0",
+    "socket.io": "~0.9.16",
+    "pngparse":"*"
+  }
+}

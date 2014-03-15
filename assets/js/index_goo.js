@@ -37,8 +37,15 @@ require([
 						0
 					);
 
-					if(audioData && audioData.spectrum)
-						console.log(audioData.guess);
+
+					if(audioData && audioData.spectrum){
+						entity.transformComponent.setScale(
+							0.5+audioData.guess.totalEnergy*500,
+							0.5+audioData.guess.totalEnergy*500,
+							0.5+audioData.guess.totalEnergy*500
+						);
+					}
+						// console.log(audioData.guess);
 
 					// entity.transformComponent.setScale(
 					// 	app.data,
@@ -72,7 +79,7 @@ require([
 	}
 
 	function createBoxEntity(goo) {
-		var count = 500000;
+		var count = 50000;
 
 		var attributeMap = MeshData.defaultMap([MeshData.POSITION, MeshData.COLOR]);
 		var meshData = new MeshData(attributeMap, count);

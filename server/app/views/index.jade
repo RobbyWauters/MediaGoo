@@ -1,0 +1,121 @@
+doctype html5
+html
+	head
+		meta(name='viewport', content='initial-scale=1.0, user-scalable=no')
+		title= title
+		link(href='http://fonts.googleapis.com/css?family=Alegreya+SC:400,700,400italic,700italic,900,900italic', rel='stylesheet', type='text/css')
+		link(href='http://fonts.googleapis.com/css?family=Roboto:400,700,400italic,100', rel='stylesheet', type='text/css')
+
+		link(rel='stylesheet', href="/stylesheets/style.css")
+		script(type='text/javascript', src='//code.jquery.com/jquery.min.js')
+		script(type='text/javascript', src='/vendor/jquery.tmpl.min.js')
+		script(type='text/javascript', src='/vendor/modernizr.custom.13282.js')
+		script(type='text/javascript', src='/javascripts/flyingtiles.js')
+		if mobile
+			script(type='text/javascript', src='/javascripts/upload.mobile.js')
+		else
+			script(type='text/javascript', src='/javascripts/upload.desktop.js')
+		script(type='text/javascript', src='/javascripts/sharing.js')
+		script(type='text/javascript', src='/javascripts/index.js')
+
+		if fancybg
+			script.
+				if (!("WebKitCSSMatrix" in window)) window.location.pathname = "/simple";
+
+		if forceOldFashionUpload
+			script.
+				window.forceOldFashionUpload = true;
+
+		if userid
+			script.
+				window.userid = "#{userid}";
+
+		if !fancybg
+			script.
+				window.isSimpleView = true;
+
+		script#share-template(type="text/x-jquery-tmpl")
+			.share
+				.highqualitylink
+					a(href="/highquality/${userid}", onclick="mixpanel.track('High Quality',{'clickedOn':'link'});return true;", target="_blank") Hoge kwaliteitsversie
+
+				//- TWITTER
+				a(href='http://twitter.com/home?status=${sharing.message}%20${sharing.url}%20${twitpic}', target='blank')
+					img(src='/images/social/twitter-ball-64.png')
+
+				//- FACEBOOK
+				a(href='http://www.facebook.com/sharer.php?u=${sharing.sharebleUrl}', target='blank')
+					img(src='/images/social/fb-ball-64.png')
+
+				//- GOOGLE PLUS
+				a(href='https://plus.google.com/share?url=${sharing.sharebleUrl}', target='blank')
+					img(src='/images/social/g+-ball-64.png')
+
+				//- LINKEDIN
+				a(href='http://www.linkedin.com/shareArticle?mini=true&url=${sharing.sharebleUrl}&title=${sharing.title}', target='blank')
+					img(src='/images/social/linkedin-ball-64.png')
+
+				//- PINTEREST
+				a(href='//pinterest.com/pin/create/link/?url=${sharing.sharebleUrl}&media=${sharing.imageUrl}&description=${sharing.messageNoHash}', target='blank')
+					img(src='/images/social/pinter-ball-64.png')
+
+				.retry
+					a(href="", onclick="mixpanel.track('Retry');window.location.reload(false);return false;") Probeer opnieuw!
+
+
+		include analytics
+
+	body
+		if mobile
+			script.
+				mixpanel.track("Page View",{"fancybg":"#{fancybg}", "mobile":true})
+		else
+			script.
+				mixpanel.track("Page View",{"fancybg":"#{fancybg}", "mobile":false})
+		if fancybg
+			iframe.fancybg(src="/fancybg")
+		else
+			.staticbg
+
+		.overlay
+			.title
+				strong MiX
+				| &nbsp;je selfie met het Media Jaaroverzicht
+			.subtitle Upload je foto en zie jezelf opgebouwd met de Media-hoogtepunten van 2013
+			.cardwrapper(style="width:#{card.width}px; height:#{card.height}px")
+				img.christmascard(src="/images/example.png", data-width="#{card.width}", data-height="#{card.height}", data-mosaic-offset-x="#{card.mosaicOffsetX}", data-mosaic-offset-y="#{card.mosaicOffsetY}")
+				each tile in tiles
+					img.faketile(src="#{tile.image}", title="#{tile.title}" data-top="#{tile.top}", data-left="#{tile.left}", data-size="#{tile.size}", data-maxsize="#{tile.maxsize}")
+				img.userchristmascard(title="Klik om de hoge kwaliteitsversie te laden")
+
+				.buttons
+					if mobile
+						span.button(title="Neem een foto")
+							img(src="/images/cam.png")
+							input#fileinput.fileinput(type="file", name="files[]", accept="image/*")
+
+					else
+						#normalupload
+							span#webcambutton.button.left
+								img(src="/images/webcam.png")
+							span.button.right
+								img(src="/images/gallery.png")
+								input#fileinput.fileinput(type="file", name="files[]", accept="image/*")
+
+						form#oldfashionupload(action='/oldfashionupload', enctype='multipart/form-data', method='post')
+							| Selecteer een foto:
+							br
+							input(type='file', name='file')
+							br
+							input(type='submit', value='Verstuur')
+						.webcamwrapper
+							.webcam
+								video#video
+								.takepicture
+									| Neem foto
+								canvas#canvas
+				span.webcamNotification Geef toestemming aan de webcam (zie boven)
+			.sharewrapper
+
+			br
+			br

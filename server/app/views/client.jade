@@ -1,0 +1,20 @@
+doctype html5
+html
+	head
+		meta(name='viewport', content='initial-scale=1.0, user-scalable=no')
+		title= title
+		link(rel='stylesheet', href="/stylesheets/style.css")
+
+		script(type='text/javascript', src='//code.jquery.com/jquery.min.js')
+		script(type='text/javascript', src="//code.jquery.com/ui/1.10.0/jquery-ui.js")
+		script(type='text/javascript', src='/javascripts/index.js')
+		script(type='text/javascript', src='/javascripts/upload.mobile.js')
+		script(src='/socket.io/socket.io.js')
+
+	body
+		.container
+			img(src="/images/cam.png")
+			input#fileinput.fileinput(type="file", name="files[]", accept="image/*")
+
+
+
