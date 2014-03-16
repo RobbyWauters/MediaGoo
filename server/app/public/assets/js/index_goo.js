@@ -13,7 +13,7 @@ require([
 
     var bitmapArray = [];
     var imageArr = [];
-    var LOOP = 100;
+    var LOOP = 200;
     var NUM_POINTS = LOOP * LOOP;
     var goo;
     var lastEntity;
@@ -103,7 +103,7 @@ require([
 
                     var sum = colors[i * 4 + 0] + colors[i * 4 + 1] + colors[i * 4 + 2];
 
-                    verts[i * 3 + 2] = audioData.guess.totalEnergy * 1000 * (sum * 100);
+                    verts[i * 3 + 2] = audioData.guess.primaryNoteEnergy * 1000 * (sum * 100);
                 }
                 entity.meshDataComponent.meshData.vertexData._dataNeedsRefresh = true;
 			}
