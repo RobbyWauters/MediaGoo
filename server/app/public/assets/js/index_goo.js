@@ -16,6 +16,7 @@ require([
     var LOOP = 100;
     var NUM_POINTS = LOOP * LOOP;
     var goo;
+    var lastEntity;
 
     function loadImage(){
         for (var i = 0; i < NUM_POINTS; i++) {
@@ -52,7 +53,7 @@ require([
 	function createPointCloud(){
 		// Add points
 		var pointsEntity = createBoxEntity(goo);
-
+		lastEntity = pointsEntity
 		// Add spin
 		pointsEntity.setComponent(new ScriptComponent({
 			run : function(entity) {
@@ -64,15 +65,6 @@ require([
 					// 	0
 					// );
 
-
-					// if(audioData && audioData.spectrum){
-					// 	entity.transformComponent.setScale(
-					// 		0.5+audioData.guess.totalEnergy*500,
-					// 		0.5+audioData.guess.totalEnergy*500,
-					// 		0.5+audioData.guess.totalEnergy*500
-					// 	);
-					// }
-						// console.log(audioData.guess);
 
 					entity.transformComponent.setUpdated();
 
@@ -121,6 +113,8 @@ require([
 
 	function newContent(data){
 	    console.log(data);
+	    if(lastEntity)
+	    	lastEntity.removeFromWorld();
 	    imageArr.push(data);
 	    createPointCloud();
 	}
@@ -137,85 +131,6 @@ require([
 		document.body.appendChild(goo.renderer.domElement);
 
 		goo.renderer.setClearColor(0,0,0,1);
-
-// 		// Add points
-// 		var pointsEntity = createBoxEntity(goo);
-
-// 		// Add spin
-// 		pointsEntity.setComponent(new ScriptComponent({
-// 			run : function(entity) {
-// 				// if(app && app.data){
-// 					// console.log(app.data);
-// 					entity.transformComponent.transform.setRotationXYZ(
-// 						entity._world.time * 0.3,
-// 						entity._world.time * 0.6,
-// 						0
-// 					);
-
-
-// 					// if(audioData && audioData.spectrum){
-// 					// 	entity.transformComponent.setScale(
-// 					// 		0.5+audioData.guess.totalEnergy*500,
-// 					// 		0.5+audioData.guess.totalEnergy*500,
-// 					// 		0.5+audioData.guess.totalEnergy*500
-// 					// 	);
-// 					// }
-// 						// console.log(audioData.guess);
-
-// 					entity.transformComponent.setUpdated();
-
-
-// 				// }
-//                 // audioData.guess
-//                 //  Object {totalEnergy: 0.0002676707959839109, primaryNoteEnergy: 0.00005799675205730361, primaryNote: 14437.5}
-
-//                 // audioData.spectrum
-//                 //  Array[256]
-
-
-//                 //entity.transformComponent.transform.setS
-
-//                 entity.transformComponent.transform.setRotationXYZ(
-//                     entity._world.time * 0.3,
-//                     entity._world.time * 0.6,
-//                     0
-//                 );
-
-//                 entity.transformComponent.setUpdated();
-
-//                 if (!audioData.spectrum) return;
-
-
-//                 var verts = entity.meshDataComponent.meshData.getAttributeBuffer(MeshData.POSITION);
-//                 var colors = entity.meshDataComponent.meshData.getAttributeBuffer(MeshData.COLOR);
-
-//                 for (var i = 0; i < NUM_POINTS; i++) {
-// //                    var x = (Math.random()-0.5)*5.0;
-// //                    var y = (Math.random()-0.5)*5.0;
-// //                    var z = (Math.random()-0.5)*5.0;
-
-// //                	var x = audioData.spectrum[i] * 10;
-// //                	var y = audioData.spectrum[i] * 10;
-// //                	var z = audioData.spectrum[i] * 10;
-// //                  var x = audioData.spectrum[Math.floor(Math.random() * 256)] * 10;
-// //                	var y = audioData.spectrum[Math.floor(Math.random() * 256)] * 10;
-// //                	var z = audioData.spectrum[Math.floor(Math.random() * 256)] * 10;
-
-// //                	verts[i * 3 + 0] = x;
-// //                	verts[i * 3 + 1] = y;
-// //                	verts[i * 3 + 2] = audioData.spectrum[i] * 10;
-
-// //                	verts[i] = audioData.spectrum[i] * 10;
-// //                    console.log(audioData.guess.totalEnergy);
-
-//                     var sum = colors[i * 4 + 0] + colors[i * 4 + 1] + colors[i * 4 + 2];
-
-//                     verts[i * 3 + 2] = audioData.guess.totalEnergy * 1000 * (sum * 100);
-//                 }
-//                 entity.meshDataComponent.meshData.vertexData._dataNeedsRefresh = true;
-// 			}
-// 		}));
-// 		pointsEntity.addToWorld();
 
 		// Add camera
 		var camera = new Camera(45, 1, 5, 3500);
@@ -247,7 +162,7 @@ require([
 		var n = 2000, n2 = n / 2;
         var cnt = 0;
 
-        for (var i = LOOP-1; i >= 0; i--) {
+        for (var i = LOOP; i >= 0; i--) {
             for (var j = 0; j < LOOP; j++) {
                 var multX = j/LOOP;
                 var multY = i/LOOP;
@@ -261,46 +176,15 @@ require([
                 verts[cnt * 3 + 1] = y;
                 verts[cnt * 3 + 2] = z;
 
-                // var rgb = hexToRgb(bitmapArray[i][j]);
-
-                // colors[cnt * 4 + 0] = rgb.r;
-                // colors[cnt * 4 + 1] = rgb.g;
-                // colors[cnt * 4 + 2] = rgb.b;
-                // colors[cnt * 4 + 3] = 1.0;
-
-                colors[cnt * 4 + 0] = imageArr[0][cnt*3+0]/255;
-                colors[cnt * 4 + 1] = imageArr[0][cnt*3+1]/255;
-                colors[cnt * 4 + 2] = imageArr[0][cnt*3+2]/255;
+                colors[cnt * 4 + 0] = imageArr[imageArr.length-1][cnt*3+0]/255;
+                colors[cnt * 4 + 1] = imageArr[imageArr.length-1][cnt*3+1]/255;
+                colors[cnt * 4 + 2] = imageArr[imageArr.length-1][cnt*3+2]/255;
                 colors[cnt * 4 + 3] = 1.0;
 
                 cnt++;
             }
         }
 
-		/*for (var i = 0; i < count; i++) {
-			var x = Math.random() * n - n2;
-			var y = Math.random() * n - n2;
-			var z = 1; //Math.random() * n - n2;
-
-			verts[i * 3 + 0] = x;
-			verts[i * 3 + 1] = y;
-			verts[i * 3 + 2] = z;
-			var l = (Math.max(x*x, y*y, z*z) / (n2*n2)) * 0.8 + 0.2;
-
-            *//*var vx = (x / n) + 0.5;
-			var vy = (y / n) + 0.5;
-			var vz = (z / n) + 0.5;
-
-			colors[i * 4 + 0] = vx * l;
-			colors[i * 4 + 1] = vy * l;
-			colors[i * 4 + 2] = vz * l;
-			colors[i * 4 + 3] = 1.0;*//*
-
-            colors[i * 4 + 0] = 1.0;
-            colors[i * 4 + 1] = 1.0;
-            colors[i * 4 + 2] = 1.0;
-            colors[i * 4 + 3] = 1.0;
-		}*/
 
 		var entity = EntityUtils.createTypicalEntity(goo.world, meshData);
 		entity.transformComponent.transform.translation.z = -2750;
