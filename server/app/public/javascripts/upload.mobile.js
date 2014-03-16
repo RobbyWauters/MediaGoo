@@ -19,21 +19,7 @@ var Upload = function (){
 		// hide the photo button(s):
 		buttonEl.hide();
 		uploadImage(event.target.files[0], function (data){
-			// done
 
-
-
-			// // done: complete the animation and show his image
-			// $(".userchristmascard").attr('src', data.mosaicimage); // set image first, so it can preload
-
-
-			// // show user image after tiles have been flown in:
-			// setTimeout(function () {
-			// 	$(".userchristmascard").addClass('visible');
-			// 	Sharing.renderButtons(data);
-			// 	$(".userchristmascard").click(function (event) {
-
-			// 	});
 		});
 	};
 
