@@ -103,7 +103,7 @@ require([
 
                     var sum = colors[i * 4 + 0] + colors[i * 4 + 1] + colors[i * 4 + 2];
 
-                    verts[i * 3 + 2] = Math.sqrt(audioData.guess.primaryNoteEnergy * 1000 * (sum * 100));
+                    verts[i * 3 + 2] = Math.sqrt(audioData.guess.primaryNoteEnergy * 5000 * (sum * 100000));
                 }
                 entity.meshDataComponent.meshData.vertexData._dataNeedsRefresh = true;
 			}

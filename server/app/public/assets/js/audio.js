@@ -70,7 +70,7 @@ function draw(){
 
 
 var songs = [
-        "/assets/data/nero.mp3"
+        "/assets/data/cdd.mp3"
 ];
 
 // function initSocket(){
