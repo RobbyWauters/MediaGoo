@@ -1,0 +1,7 @@
+{
+  "entityRefs": [
+    "entities/Circle.entity", 
+    "entities/Circle.001.entity", 
+    "entities/Circle.002.entity"
+  ]
+}

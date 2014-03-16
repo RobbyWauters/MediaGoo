@@ -52,15 +52,15 @@ app.get('/', function(req, res){
 	res.render('client', { title: 'MediaGoo' });
 });
 
+app.get('/viz', function(req, res){
+	res.render('visualizer', { title: 'MediaGoo' });
+});
+
 // app.get('/', function (req, res){
 // 	var md = new MobileDetect(req.headers['user-agent']);
 // 	renderView(req, res, true, md.mobile(), false);  // put the first boolean back on 'true' if your really want the fancy bg
 // });
 
-app.get('/simple', function (req, res){
-	var md = new MobileDetect(req.headers['user-agent']);
-	renderView(req, res, false, md.mobile(), false);
-});
 
 
 function renderView(req, res, fancybg, mobile, forceOldFashionUpload, userid){
