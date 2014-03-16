@@ -21,6 +21,7 @@ function crop (inputfile, width, heigth, outputfile, callback) {
 	im.convert([
 		inputfile,
 		'+repage'     ,
+		'-auto-orient',
 		'-resize'     , width+'x'+heigth+'^',
 		'-gravity'    , 'center',
 		'-crop'       , width+'x'+heigth+'+0+0',

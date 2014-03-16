@@ -9,12 +9,10 @@ var _ = require('underscore');
 var crypto = require('crypto');
 var MobileDetect = require('mobile-detect');
 var config = require('./config');
-var mosaic = require('./mosaic');
 var utils = require('./utils');
-var twitimage = require('./twitimage');
-var im = require('imagemagick');
 var socketio = require('socket.io');
-var pngparse = require("pngparse")
+var pngparse = require("pngparse");
+var image = require('./image');
 
 var ROOTDIR = path.join(__dirname, config.mosaic.folders.root);
 
@@ -25,7 +23,6 @@ app.configure(function(){
 	app.set('views', __dirname + '/views');
 	app.set('view engine', 'jade');
 	app.use(express.favicon());
-	if(config.showExpressDebugInfo) app.use(express.logger('tiny'));
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
 	app.use(express.cookieParser('MediaGoo'));
@@ -107,7 +104,7 @@ app.post('/xhrupload', function (req, res){
 	req.on('end', function () {
 		if(config.showDebugInfo) console.log("XHR Upload done");
 		ws.end();
-		// renderMosaic(null, uploadedFile, req, res);
+
 		res.send(200);
 		resizeImage(name);
 	});
@@ -115,48 +112,18 @@ app.post('/xhrupload', function (req, res){
 
 function resizeImage(imgName){
 	var uploadedFile = path.join(ROOTDIR, config.mosaic.folders.full, imgName);
-	var targetFile = path.join(ROOTDIR, config.mosaic.folders.resizes, imgName);
-	//fs.readFile(uploadedFile, function (err, data) {
-		// write file to uploads/thumbs folder
-		im.convert([uploadedFile, '-resize', '100x100', targetFile+'.png'],
-		function(err, stdout){
-			if (err) throw err;
-			console.log('stdout:', stdout);
-			pngparse.parseFile(targetFile+'.png', function(err, data) {
-				if(err)
-			    	throw err
-			    console.log(data);
-			    io.sockets.emit( 'new', data.data );
-			})
-		});
+	var targetFile = path.join(ROOTDIR, config.mosaic.folders.resizes, imgName) + '.png';
 
-		// im.resize({
-		// 	srcPath: uploadedFile,
-		// 	dstPath: targetFile,
-		// 	width:   100,
-		// 	height:  100
-		// }, function(err, stdout, stderr){
-		// 	if (err) throw err;
-		// 	console.log('resized image to fit within 200x200px');
-		// 	console.log(stdout);
-		// 	// im.resize({
-		// 	// 	srcPath: uploadedFile,
-		// 	// 	dstPath: targetFile,
-		// 	// 	width:   100,
-		// 	// 	height:  100
-		// 	// }, function(err, stdout, stderr){
-		// 	// 	if (err) throw err;
+	image.crop(uploadedFile, 200, 200, targetFile, function (err, imgres) {
+		if(err) return console.log(err);
 
-		// 	// });
-		// 	fs.readFile(targetFile, function (err, data) {
-		// 		console.log(data[0]);
-		// 		console.log(data.length);
-		// 		//io.sockets.emit( 'reset', id );
-		// 		//res.send(200);
-		// 	});
-		// });
-	//}
+		pngparse.parseFile(targetFile, function (err, data) {
+			if(err) return console.log(err);
 
+		    console.log(data);
+		    io.sockets.emit( 'new', data.data );
+		})
+	});
 }
 
 
