@@ -17,7 +17,8 @@ var Upload = function (){
 
 	var onFileuploadChange = function (event){
 		// hide the photo button(s):
-		buttonEl.hide();
+		$('.uploadcomplete').removeClass('show');
+
 		uploadImage(event.target.files[0], function (data){
 
 		});
@@ -39,6 +40,8 @@ var Upload = function (){
 
 		upload.addEventListener("load", function (ev) {
 			console.log("upload complete");
+
+			$('.uploadcomplete').addClass('show');
 		}, false);
 
 		upload.addEventListener("error", function (ev) {
