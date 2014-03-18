@@ -21,7 +21,7 @@ var app = express();
 /*
  *
  */
-var lastCommitedImage = [];
+var lastCommittedImage = [];
 
 app.configure(function(){
 	app.set('port', process.env.PORT || 3000);
@@ -55,7 +55,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/viz', function(req, res){
-	res.render('visualizer', { title: 'MediaGoo', startImage:'' });
+	res.render('visualizer', { title: 'MediaGoo', startImage:lastCommittedImage });
 });
 
 app.post('/xhrupload', function (req, res){
@@ -96,10 +96,28 @@ function resizeImage(imgName){
 			if(err) return console.log(err);
 
 		    console.log(data);
+		    lastCommittedImage = data.data;
 		    io.sockets.emit( 'new', data.data );
 		})
 	});
 }
+
+io.sockets.on('connection', function (socket) {
+	socket.emit( 'new', lastCommittedImage);
+});
+
+function loadStartImage(){
+	var startFile = path.join(ROOTDIR, config.mosaic.folders.startImage);
+	pngparse.parseFile(startFile, function (err, data) {
+		if(err) return console.log(err);
+
+		console.log(data);
+		lastCommittedImage = data.data;
+		// io.sockets.emit( 'new', data.data );
+	})
+}
+
+loadStartImage();
 
 
 

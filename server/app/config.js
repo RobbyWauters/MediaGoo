@@ -5,6 +5,7 @@ exports.mosaic = {
 		root       : '/public/uploads/',
 		full       : 'full/',
 		resizes    : 'resizes/',
+		startImage : 'default/vikings.png',
 		main       : 'main/',
 		tiles      : 'tiles/',
 		output     : 'output/'
