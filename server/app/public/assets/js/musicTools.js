@@ -22,6 +22,7 @@ function guessNote(spectrum){
     return {
         totalEnergy: total,
         primaryNoteEnergy: primaryNoteEnergy,
-        primaryNote: primaryNote
+        primaryNote: primaryNote,
+        allNotes: notes
     };
 }

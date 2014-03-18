@@ -25,6 +25,7 @@ function play(src){
     audio = document.createElement('audio');
     audio.src = src;
     audio.controls = true;
+    audio.loop = true;
     document.body.appendChild(audio);
     audio.addEventListener('canplay', function() {
         source = context.createMediaElementSource(audio);
@@ -70,7 +71,7 @@ function draw(){
 
 
 var songs = [
-        "/assets/data/cdd.mp3"
+        "/assets/data/nero.mp3"
 ];
 
 // function initSocket(){

@@ -13,6 +13,11 @@ head
     script(src='assets/js/musicTools.js')
     link(rel='stylesheet', href="/stylesheets/goo.css")
 
+    script.
+        PointCloud = {};
+
+        PointCloud.image = !{JSON.stringify(startImage)};
+
   body
     script(src='assets/js/index_goo.js')
     script(src='assets/js/audio.js')

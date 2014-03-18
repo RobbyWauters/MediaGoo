@@ -18,6 +18,11 @@ var ROOTDIR = path.join(__dirname, config.mosaic.folders.root);
 
 var app = express();
 
+/*
+ *
+ */
+var lastCommitedImage = [];
+
 app.configure(function(){
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', __dirname + '/views');
@@ -50,38 +55,8 @@ app.get('/', function(req, res){
 });
 
 app.get('/viz', function(req, res){
-	res.render('visualizer', { title: 'MediaGoo' });
+	res.render('visualizer', { title: 'MediaGoo', startImage:'' });
 });
-
-// app.get('/', function (req, res){
-// 	var md = new MobileDetect(req.headers['user-agent']);
-// 	renderView(req, res, true, md.mobile(), false);  // put the first boolean back on 'true' if your really want the fancy bg
-// });
-
-
-
-function renderView(req, res, fancybg, mobile, forceOldFashionUpload, userid){
-	getSomeRandomTilesWithPosition(50, function (err, tiles) {
-		if(err) return utils.sendError(err, res);
-
-		res.render('index', {
-			title: '| MiX Kerstkaart 2013',
-			tiles: tiles,
-			card : {
-				width: config.mosaic.greetingcard.lowres.width,
-				height: config.mosaic.greetingcard.lowres.height,
-				mosaicOffsetX: config.mosaic.greetingcard.lowres.offset.x,
-				mosaicOffsetY: config.mosaic.greetingcard.lowres.offset.y
-			},
-			fancybg: fancybg,
-			mobile: mobile,
-			forceOldFashionUpload: forceOldFashionUpload,
-			userid: userid
-		});
-	});
-}
-
-
 
 app.post('/xhrupload', function (req, res){
 	if(!req.xhr) return utils.sendError(new Error('got no xhr request'), res);
