@@ -18,6 +18,8 @@ A project made in the 24 hour [Media Hackathon 2014](http://mediahackathon.be/).
 ## Description
 At a live performance, every visitor can use the Client app on its smartphone to take pictures and let them appear on stage in a 3D point cloud that is reacting to the live music.
 
+![](https://raw.github.com/RobbyWauters/MediaGoo/master/server/viz.jpg)
+
 ## Server
 The Node.js server hosts the Visualization and Client app and resizes and converts the taken pictures.
 The converted, cropped and resized images (via ImageMagick) are send to the Visualization app through Websockets.
