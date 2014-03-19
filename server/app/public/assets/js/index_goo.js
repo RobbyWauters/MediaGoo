@@ -93,9 +93,9 @@ require([
 					}
 
 					if(xDir==1){
-						xDelta+= 0.5+Math.random()*0.5;
+						xDelta+= 0.5+Math.random()*2.5;
 					}else{
-						xDelta-= 0.5+Math.random()*0.5;;
+						xDelta-= 0.5+Math.random()*2.5;;
 					}
 
 					if(yDir==1){
