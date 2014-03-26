@@ -40,6 +40,7 @@ The converted, cropped and resized images (via ImageMagick) are send to the Visu
 
 
 ## Visualization (on stage)
+* Connect your sound output to the line-in of your computer
 * ```http://IP-ADDRESS/viz```
 
 ## Client
