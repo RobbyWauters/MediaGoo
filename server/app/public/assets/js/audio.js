@@ -1,81 +1,65 @@
 var context;
-var audio;
 var audioData = {};
 var socket;
-// var ctx = c.getContext('2d');
-// ctx.fillRect(0, 0, c.width, c.height);
-// var imageData = ctx.getImageData(0, 0, 1, c.height);
 
 
 window.addEventListener('load', init, false);
-function init() {
-    try {
-    var AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext
-    context = new AudioContext();
 
-    play(songs[0]);
+function init () {
+    window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
+
+    var analyser;
+    var microphone;
+    if (navigator.getUserMedia) {
+        navigator.getUserMedia({audio: true}, function (stream) {
+            context = new AudioContext();
+            analyser = context.createAnalyser();
+            microphone = context.createMediaStreamSource(stream);
+            microphone.connect(analyser);
+            analyser.connect(context.destination); // KAN IN COMMENTAAR, dan hoor je niets
+            process();
+        });
+    };
+    function process(){
+        setInterval(function(){
+            FFTData = new Float32Array(analyser.frequencyBinCount);
+            analyser.getFloatFrequencyData(FFTData);
+            console.log(FFTData[0]);
+
+            //store for GOO to use:
+            audioData.spectrum = FFTData;
+            audioData.guess = guessNote(FFTData);
+        },10);
     }
-    catch(e) {
-        alert('Web Audio API is not supported in this browser');
+}
+
+function guessNote(spectrum){
+    var notes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        primaryNote = 0,
+        primaryNoteEnergy = -Infinity,
+        total = 0,
+        energy,
+        freq,
+        note;
+
+    for(var i = 19; i < spectrum.length; i++) {
+        energy = Math.pow(10, spectrum[i]/10);
+        freq = i*context.sampleRate/spectrum.length/2,
+            note = Math.round(
+                Math.log(freq/440)/Math.log(2)*12)%12;
+        notes[note] += energy;
+        if(notes[note] > primaryNoteEnergy){
+            primaryNote = freq;
+            primaryNoteEnergy = notes[note];
+        }
+        total += energy;
     }
+    return {
+        totalEnergy: total,
+        primaryNoteEnergy: primaryNoteEnergy,
+        primaryNote: primaryNote,
+        allNotes: notes
+    };
 }
-
-function play(src){
-    audio = document.createElement('audio');
-    audio.src = src;
-    audio.controls = true;
-    audio.loop = true;
-    document.body.appendChild(audio);
-    audio.addEventListener('canplay', function() {
-        source = context.createMediaElementSource(audio);
-        analyser = context.createAnalyser();
-        analyser.smoothingTimeConstant = 0.0;
-        spectrum = new Float32Array(analyser.fftSize/8);
-        source.connect(analyser);
-        analyser.connect(context.destination);
-        audio.play();
-        setInterval('updateAudioData();', 10);
-    });
-}
-
-function updateAudioData () {
-    // body...
-    analyser.getFloatFrequencyData(spectrum);
-    audioData.spectrum = spectrum;
-    audioData.guess = guessNote(spectrum);
-    // GUESS
-        // totalEnergy
-        // primaryNoteEnergy
-        // primaryNote
-}
-
-
-
-var songs = [
-        "/assets/data/cdd.mp3"
-];
-
-// function initSocket(){
-//     //socket IO:
-//     if(!socket){
-//         // socket.io initialiseren
-//         socket = io.connect(window.location.hostname);
-//         // some debugging statements concerning socket.io
-//         socket.on('reconnecting', function(seconds){
-//             console.log('reconnecting in ' + seconds + ' seconds');
-//         });
-//         socket.on('reconnect', function(){
-//             console.log('reconnected');
-//         });
-//         socket.on('reconnect_failed', function(){
-//             console.log('failed to reconnect');
-//         });
-//         socket.on('new', newContent);
-//     }
-// }
-
-// function newContent(data){
-//     console.log(data);
-// }
-
