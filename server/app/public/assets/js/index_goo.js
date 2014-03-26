@@ -70,50 +70,48 @@ require([
 		pointsEntity.setComponent(new ScriptComponent({
 			run : function(entity) {
 				// if(app && app.data){
-					// console.log(app.data);
-					var rotX = entity.transformComponent.getRotation().x;
-					var rotY = entity.transformComponent.getRotation().y;
+				// console.log(app.data);
+				var rotX = entity.transformComponent.getRotation().x;
+				var rotY = entity.transformComponent.getRotation().y;
+
+				if(rotX <= -0.8){
+					xDir = 1;
+					//xFactor = 0.003 + Math.random()*0.005;
+				}else if(rotX >= 0.8){
+					xDir = -1;
+					//xFactor = 0.003 + Math.random()*0.005;
+				}
+
+				if(rotY <= -0.7){
+					yDir = 1;
+					//yFactor = 0.005 + Math.random()*0.005;
+				}else if(rotY >= 0.7){
+					yDir = -1;
+					//yFactor = 0.005 + Math.random()*0.005;
+				}
+
+				if(xDir==1){
+					xDelta+= 0.5+Math.random()*2.5;
+				}else{
+					xDelta-= 0.5+Math.random()*2.5;;
+				}
+
+				if(yDir==1){
+					yDelta++;
+				}else{
+					yDelta--;
+				}
+
+				entity.transformComponent.transform.setRotationXYZ(
+					xDelta * xFactor,
+					yDelta * yFactor,
+					0
+				);
+
+				// rotation between (-1,-0.7,0) and (1,0.7,0)
 
 
-
-					if(rotX <= -0.8){
-						xDir = 1;
-						//xFactor = 0.003 + Math.random()*0.005;
-					}else if(rotX >= 0.8){
-						xDir = -1;
-						//xFactor = 0.003 + Math.random()*0.005;
-					}
-
-					if(rotY <= -0.7){
-						yDir = 1;
-						//yFactor = 0.005 + Math.random()*0.005;
-					}else if(rotY >= 0.7){
-						yDir = -1;
-						//yFactor = 0.005 + Math.random()*0.005;
-					}
-
-					if(xDir==1){
-						xDelta+= 0.5+Math.random()*2.5;
-					}else{
-						xDelta-= 0.5+Math.random()*2.5;;
-					}
-
-					if(yDir==1){
-						yDelta++;
-					}else{
-						yDelta--;
-					}
-
-					entity.transformComponent.transform.setRotationXYZ(
-						xDelta * xFactor,
-						yDelta * yFactor,
-						0
-					);
-
-					// rotation between (-1,-0.7,0) and (1,0.7,0)
-
-
-					entity.transformComponent.setUpdated();
+				entity.transformComponent.setUpdated();
 
 
 				// }
