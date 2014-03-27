@@ -19,6 +19,7 @@ body {
   background-color: #fff;
   position: relative;
   color: #000;
+  overflow: hidden;
 }
 a {
   color: inherit;
@@ -39,11 +40,12 @@ a {
 }
 .camwrapper {
   position: absolute;
-  top: 0;
+  top: 40%;
   bottom: 0;
   left: 0;
   right: 0;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   width: 64px;
   height: 64px;
 }

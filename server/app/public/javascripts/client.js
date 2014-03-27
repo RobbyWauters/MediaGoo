@@ -4,6 +4,8 @@ $(function(){
 	var socket;
 	upload.init();
 	initSocket();
+	if(screen.height < $('body').height())
+		$('body').height(screen.height);
 
 	function initSocket(){
 		//socket IO:
