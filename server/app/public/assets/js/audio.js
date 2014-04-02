@@ -26,7 +26,7 @@ function init () {
         setInterval(function(){
             FFTData = new Float32Array(analyser.frequencyBinCount);
             analyser.getFloatFrequencyData(FFTData);
-            console.log(FFTData[0]);
+            // console.log(FFTData[0]);
 
             //store for GOO to use:
             audioData.spectrum = FFTData;
