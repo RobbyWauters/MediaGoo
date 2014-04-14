@@ -18,7 +18,7 @@ function init () {
             analyser = context.createAnalyser();
             microphone = context.createMediaStreamSource(stream);
             microphone.connect(analyser);
-            analyser.connect(context.destination); // KAN IN COMMENTAAR, dan hoor je niets
+            // analyser.connect(context.destination); // KAN IN COMMENTAAR, dan hoor je niets
             process();
         });
     };
